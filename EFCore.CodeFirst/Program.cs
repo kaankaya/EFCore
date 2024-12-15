@@ -12,6 +12,29 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
+    //First(x=>x.Id == 100) ıd si 100 eşit olanı bul yoksa hata fırlat
+    //FirstOrDefault(x=>x.Id == 100) yoksa geriye null döner. bunun ek olarak null oldugunda değer verebiliyoruz FirstOrDefault(x=>x.Id == 100,new Product(){Id=1,Name="kalem1});
+    //SingleAsync(x=>x.Id > 10) 10 den birden fazla var ise hata atar,Şartı sağlayan tekbir data olursa alır single yoksa hatayı fırlatır
+    //Where(x=>x.Id > 10).ToListAsync() where de içeri deki şartı sağlayan değerleri bir liste olarak geri döner
+    //Where(x=>x.Id > 10 && x.Name = "kalem 10").ToListAsync() eğer birden fazla data ya göre listelemek istersek de bu şekilde yazmamız gerekiyor
+    //FirstAsync(10) tek data için olur ve ilk gelen olur.ilgili datayı bulamaz ise null döner ama mutlaka hata dönsün derseniz null olmasın derseniz Single() kullanılması gerekiyor
+
+    var products = await _context.Products.FirstAsync(x=>x.Id == 10);
+
+    //products.ForEach(p =>
+    //{
+
+    //});
+
+
+
+
+
+
+
+
+
+
     //AsNoTracking(); gelen data efcore tarafından track edilmemesini sağlıyor.Ram daha düzgün oluyor.
     //Ekranda aldıgımız datayı direk listeleme yapıyorsak kullanmalıyız.çünkü herhangi bir değişiklik yapmıyacak performans açısından önemli
     //tolist direk çağırmak çok bestpractic değil 1 milyon data geldiğinde sorun oluşabilir.SAyfalama yaparak parça parça çıkarabilirisz
@@ -27,9 +50,9 @@ using (var _context = new AppDbContext())
     //buradaki e memory de track edilen her bir dataya denk geliyor
 
 
-    _context.Products.Add(new Product { Name = "Kalem7", Price = 300, Stock = 200, Barcode = 697});
-    _context.Products.Add(new Product { Name = "Kalem8", Price = 300, Stock = 200, Barcode = 697});
-    _context.Products.Add(new Product { Name = "Kalem9", Price = 300, Stock = 200, Barcode = 697});
+    //_context.Products.Add(new Product { Name = "Kalem7", Price = 300, Stock = 200, Barcode = 697});
+    //_context.Products.Add(new Product { Name = "Kalem8", Price = 300, Stock = 200, Barcode = 697});
+    //_context.Products.Add(new Product { Name = "Kalem9", Price = 300, Stock = 200, Barcode = 697});
    //_context.ContextId Birden fazla context imiz var ise id ile müdahale edebiliriz loglama için
    //_context.Database ile istersek transction yönetimi istersek ham sql istersek migrate vb birden fazla işlemleri yönetebiliriz Soyutlanan tüm süreçlere erişebiliriz
 
