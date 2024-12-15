@@ -16,5 +16,23 @@ namespace EFCore.CodeFirst.DAL
             Initializer.Build();
             optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("Sqlcon"));
         }
+        public override int SaveChanges()
+        {
+            //CHANGER TRACKER
+            ChangeTracker.Entries().ToList().ForEach(e =>
+            {
+                //entity si product olanları yakala ve p değişkenine ata
+                //is kelimesi herhangi bir nesneyi dönüşütürüp dönüştürülmeyeciğini true false döner
+                if (e.Entity is Product p)
+                {
+                    if (e.State == EntityState.Added)
+                    {
+                        p.CreatedDate = DateTime.Now;
+                    }
+                    //Console.WriteLine($"{p.Id} - {p.Name} - {p.Price} - {p.Stock} ");
+                }
+            });
+            return base.SaveChanges();
+        }
     }
 }
