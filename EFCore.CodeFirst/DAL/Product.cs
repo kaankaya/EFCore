@@ -24,7 +24,12 @@ namespace EFCore.CodeFirst.DAL
         //her yapılan bir değişik de yeni migration oluşturmamız gerekiyor senkron olması adına
         //yeni bir sutun ekledik ve yeni bir migration daha oluşturduk
         //çalışma prensibine göre önce addmigrate yaptıgımız da snapshot gidiyor bakıyor kıyaslıyor eksik olanı tespit edip ona göre yeni bir migrate oluşturuyor
-        public DateTime? CreatedDate { get; set; }
         public int Barcode { get; set; }
+
+        //bir product un bir kategorisi olur - CategoryId yazarak ef core otomatik olarak foreign key olarak algıyıor
+        public int CategoryId { get; set; }
+        //Bu navigation Property dir
+        public Category Category { get; set; }
+
     }
 }
