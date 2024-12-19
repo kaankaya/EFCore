@@ -16,6 +16,17 @@ namespace EFCore.CodeFirst.DAL
             Initializer.Build();
             optionsBuilder.UseSqlServer(Initializer.Configuration.GetConnectionString("Sqlcon"));
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Product>().ToTable("productTBB", "productsbb");
+            modelBuilder.Entity<Product>().Property(x=>x.Name).IsRequired();
+            modelBuilder.Entity<Product>().Property(x=>x.Name).HasMaxLength(100); //maksimum yüz karakter al IsFixedLength(); eklersek sabit oluştur yani minumum da en fazla 100 karkater olucak
+            //nvarchar -nchar  n uniq oldugunu ifade eder.nchar tipi sabit oldugunu söyler nvarchar da var ifadesi belirli bir uzunlugu ayarlıyabiliriz.sabit değildir.
+            //fluent api öncelikle veritabanına yansır sonra data anationlar yansır
+            base.OnModelCreating(modelBuilder);
+        }
+
         public override int SaveChanges()
         {
             //CHANGER TRACKER

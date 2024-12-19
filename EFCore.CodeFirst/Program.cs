@@ -12,6 +12,12 @@ using Microsoft.EntityFrameworkCore;
 Initializer.Build();
 using (var _context = new AppDbContext())
 {
+
+
+
+
+
+
     //First(x=>x.Id == 100) ıd si 100 eşit olanı bul yoksa hata fırlat
     //FirstOrDefault(x=>x.Id == 100) yoksa geriye null döner. bunun ek olarak null oldugunda değer verebiliyoruz FirstOrDefault(x=>x.Id == 100,new Product(){Id=1,Name="kalem1});
     //SingleAsync(x=>x.Id > 10) 10 den birden fazla var ise hata atar,Şartı sağlayan tekbir data olursa alır single yoksa hatayı fırlatır
@@ -19,18 +25,12 @@ using (var _context = new AppDbContext())
     //Where(x=>x.Id > 10 && x.Name = "kalem 10").ToListAsync() eğer birden fazla data ya göre listelemek istersek de bu şekilde yazmamız gerekiyor
     //FirstAsync(10) tek data için olur ve ilk gelen olur.ilgili datayı bulamaz ise null döner ama mutlaka hata dönsün derseniz null olmasın derseniz Single() kullanılması gerekiyor
 
-    var products = await _context.Products.FirstAsync(x=>x.Id == 10);
+    //var products = await _context.Products.FirstAsync(x=>x.Id == 10);
 
     //products.ForEach(p =>
     //{
 
     //});
-
-
-
-
-
-
 
 
 

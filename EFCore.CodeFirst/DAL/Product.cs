@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EFCore.CodeFirst.DAL
 {
+    //Configuration yapmak için Efcore bize 3 tane seçenek sunar
+    //Data Annotations Attributes , Fluent Apı,Convensions
+    //[Table("ProductTb",Schema ="products")] tablo ismini böyle tanımlıyabiliriz
     public class Product
     {
         public int Id { get; set; }
+        //[Column("name2",TypeName ="nvarchar")] column tipleri için
+        //[Column("name2",Order = 1)] column tipleri için order ile sıralamasını ayarlıyabiliriz
+        //nullable açık ise nullable:False dir.Eğer projenin propertieslerinden kapalı olursa nullable:true olur string ifadeler için
+        //[MaxLength(100)]//en fazla 100 karakter al diyoruz
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
